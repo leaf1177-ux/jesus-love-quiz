@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>你有多愛耶穌？｜青教組趣味信仰挑戰</title>
+<style>
+:root {
+  --site-primary: #5b4be7;
+  --site-on-primary: #ffffff;
+  --site-secondary: #ffcf5a;
+  --site-on-secondary: #382700;
+  --site-background: #fff9ee;
+  --site-on-background: #292344;
+  --site-font-body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --site-font-heading: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --site-heading-scale: 1;
+  --site-spacing-scale: 1;
+  --site-radius-scale: 1;
+  --site-decoration-opacity: 1;
+  --surface: light-dark(#ffffff, #211f32);
+  --surface-soft: light-dark(#f2efff, #302b48);
+  --text: light-dark(#292344, #f5f1ff);
+  --muted: light-dark(#706b88, #bcb6d5);
+  --border: light-dark(#e3def8, #49425f);
+  --good: #16794b;
+  --good-bg: light-dark(#e5f8ed, #153d2b);
+  --warn: #8b5b00;
+  --warn-bg: light-dark(#fff2cf, #4b3917);
+  --shadow: 0 12px 35px rgba(54, 37, 110, .10);
+}
+* { box-sizing: border-box; }
+html { color-scheme: light dark; }
+body { margin: 0; font-family: var(--site-font-body); background: var(--site-background); color: var(--site-on-background); }
+button, input { font: inherit; }
+button { cursor: pointer; }
+#app { min-height: 100vh; width: 100%; border-radius: 0; background-color: var(--site-background); color: var(--site-on-background); overflow: hidden; }
+.hero { background: var(--site-primary); color: var(--site-on-primary); padding: calc(34px * var(--site-spacing-scale)) 20px calc(28px * var(--site-spacing-scale)); position: relative; overflow: hidden; }
+.hero:before, .hero:after { content: ""; position: absolute; opacity: var(--site-decoration-opacity); pointer-events: none; border-radius: 50%; }
+.hero:before { width: 250px; height: 250px; background: rgba(255,255,255,.08); right: -65px; top: -110px; }
+.hero:after { width: 160px; height: 160px; background: rgba(255,207,90,.18); left: -70px; bottom: -100px; }
+.hero-inner { max-width: 850px; margin: 0 auto; position: relative; z-index: 1; }
+.kicker { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.22); border-radius: 999px; padding: 7px 12px; font-size: 13px; font-weight: 800; letter-spacing: .04em; }
+h1 { font-family: var(--site-font-heading); font-size: calc( clamp(30px, 5vw, 48px) * var(--site-heading-scale)); line-height: 1.18; margin: 18px 0 12px; letter-spacing: -.04em; }
+.hero p { max-width: 620px; line-height: 1.8; margin: 0; color: rgba(255,255,255,.9); }
+.hero-stats { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 20px; }
+.pill { border-radius: 999px; padding: 7px 11px; background: rgba(255,255,255,.13); font-size: 13px; font-weight: 700; }
+main { max-width: 850px; padding: 22px 16px 50px; margin: 0 auto; }
+.notice { border: 1px solid #f1d98e; background: var(--warn-bg); color: var(--text); border-radius: calc(16px * var(--site-radius-scale)); padding: 13px 15px; line-height: 1.65; font-size: 13px; margin-bottom: 18px; }
+.topline { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 10px; color: var(--muted); font-size: 13px; font-weight: 800; }
+.progress { height: 9px; background: var(--surface-soft); border-radius: 999px; overflow: hidden; margin-bottom: 18px; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--site-primary), #ff9e58); border-radius: inherit; width: 0; transition: width .25s ease; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: calc(24px * var(--site-radius-scale)); box-shadow: var(--shadow); padding: clamp(19px, 4vw, 32px); }
+.eyebrow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; color: var(--muted); font-size: 13px; font-weight: 800; }
+.topic { color: var(--site-primary); background: var(--surface-soft); border-radius: 999px; padding: 5px 10px; }
+h2 { font-size: calc(clamp(22px, 3vw, 29px) * var(--site-heading-scale)); line-height: 1.4; margin: 14px 0 8px; color: var(--text); letter-spacing: -.02em; }
+.question-desc { color: var(--muted); line-height: 1.7; margin: 0 0 22px; }
+.options { display: grid; gap: 10px; }
+.option { display: flex; gap: 12px; align-items: flex-start; width: 100%; text-align: left; border: 1.5px solid var(--border); border-radius: calc(15px * var(--site-radius-scale)); padding: 14px; background: var(--surface); color: var(--text); transition: border-color .15s, transform .15s, background .15s; line-height: 1.65; }
+.option:hover { border-color: var(--site-primary); transform: translateY(-1px); }
+.option.selected { border-color: var(--site-primary); background: var(--surface-soft); box-shadow: 0 0 0 2px color-mix(in srgb, var(--site-primary) 14%, transparent); }
+.letter { display: inline-flex; flex: 0 0 31px; width: 31px; height: 31px; align-items: center; justify-content: center; border-radius: 10px; background: var(--surface-soft); color: var(--site-primary); font-weight: 900; }
+.option.selected .letter { background: var(--site-primary); color: var(--site-on-primary); }
+.option-copy { flex: 1; }
+.points { white-space: nowrap; border-radius: 999px; padding: 3px 8px; font-size: 12px; font-weight: 900; background: var(--good-bg); color: var(--good); align-self: center; }
+.points.pending { background: var(--warn-bg); color: var(--warn); }
+.controls { display: flex; justify-content: space-between; gap: 10px; margin-top: 22px; }
+.btn { border: 0; border-radius: 13px; padding: 12px 17px; font-weight: 900; transition: opacity .15s, transform .15s; }
+.btn:hover { transform: translateY(-1px); }
+.btn:disabled { opacity: .35; cursor: not-allowed; transform: none; }
+.btn-primary { background: var(--site-primary); color: var(--site-on-primary); }
+.btn-secondary { background: var(--surface-soft); color: var(--text); border: 1px solid var(--border); }
+.btn-quiet { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+.start-card { text-align: center; padding: clamp(25px, 5vw, 48px); }
+.big-emoji { font-size: 58px; margin-bottom: 8px; }
+.start-card h2 { margin-top: 4px; }
+.start-card p { max-width: 560px; margin: 0 auto 20px; color: var(--muted); line-height: 1.8; }
+.start-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 18px 0 25px; }
+.start-badges span { background: var(--surface-soft); color: var(--text); padding: 8px 11px; border-radius: 999px; font-size: 13px; font-weight: 800; }
+.result-head { text-align: center; padding: 22px 12px 26px; }
+.score-circle { width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 18px; display: grid; place-content: center; background: var(--surface-soft); border: 7px solid var(--site-secondary); color: var(--text); }
+.score-circle strong { font-size: 39px; line-height: 1.1; }
+.score-circle span { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.result-label { display: inline-block; padding: 8px 14px; border-radius: 999px; background: var(--site-secondary); color: var(--site-on-secondary); font-weight: 900; margin-bottom: 10px; }
+.result-copy { color: var(--muted); line-height: 1.8; max-width: 620px; margin: 0 auto; }
+.result-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; margin-top: 18px; }
+.mini { border: 1px solid var(--border); border-radius: 15px; padding: 15px; background: var(--surface); }
+.mini .label { color: var(--muted); font-size: 12px; font-weight: 800; }
+.mini .value { color: var(--text); font-size: 24px; font-weight: 900; margin-top: 5px; }
+.breakdown { margin-top: 18px; }
+.breakdown h3 { margin: 0 0 12px; }
+.break-row { display: grid; grid-template-columns: 68px 1fr 48px; gap: 10px; align-items: center; margin: 10px 0; font-size: 13px; color: var(--muted); }
+.break-bar { height: 8px; background: var(--surface-soft); border-radius: 999px; overflow: hidden; }
+.break-bar span { display: block; height: 100%; background: var(--site-primary); border-radius: inherit; }
+.result-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.small-note { color: var(--muted); font-size: 12px; line-height: 1.7; margin-top: 18px; }
+.hidden { display: none !important; }
+footer { max-width: 850px; margin: 0 auto; padding: 0 18px 30px; color: var(--muted); font-size: 12px; line-height: 1.7; text-align: center; }
+@media (max-width: 540px) { .controls .btn { flex: 1; padding: 12px 10px; } .result-grid { grid-template-columns: 1fr 1fr; } .points { font-size: 11px; } .option { padding: 12px; } .break-row { grid-template-columns: 60px 1fr 42px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<div id="app" data-sites-preview-theme="custom">
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="kicker">🎮 青教組限定・趣味信仰挑戰</div>
+      <h1>你有多愛耶穌？<br>25 題生活大挑戰</h1>
+      <p>從校車差點開走、雞排便當誘惑，到安息日與半夜惡夢——你的信仰生活，會選哪一條路？來挑戰看看！</p>
+      <div class="hero-stats"><span class="pill">📖 25 道情境題</span><span class="pill">💜 自動計分</span><span class="pill">🏆 五級評語</span><span class="pill">😂 青教組風格</span></div>
+    </div>
+  </header>
+  <main>
+    <div class="notice">💡 <strong>溫馨提醒：</strong>這是趣味反思遊戲，不是判斷誰比較屬靈或是否得救。禱告時間長短不等於愛主程度；願意悔改、愛人與實踐信仰同樣重要。第 21 題 A、E 分數尚未設定，選到時會標示「待定」，不會擅自計分。</div>
+    <section id="start" class="card start-card">
+      <div class="big-emoji">🙏🏻✨</div>
+      <h2>準備好接受挑戰了嗎？</h2>
+      <p>請依照你「平常最接近的真實反應」作答，不必猜哪個答案最漂亮。完成後會計算已知分數，並顯示對應評語。</p>
+      <div class="start-badges"><span>⏰ 早晨與校園</span><span>🍗 雞排便當</span><span>🏀 籃球場意外</span><span>⛪ 安息日生活</span></div>
+      <button id="startBtn" class="btn btn-primary">開始挑戰！🚀</button>
+    </section>
+    <section id="quiz" class="hidden">
+      <div class="topline"><span id="sectionName">第一篇｜早晨與校園生活</span><span id="progressText">第 1 / 25 題</span></div>
+      <div class="progress"><div id="progressFill" class="progress-fill"></div></div>
+      <div class="card">
+        <div class="eyebrow"><span id="topic" class="topic">早晨起床</span><span id="qType">情境選擇題</span></div>
+        <h2 id="questionTitle"></h2>
+        <p id="questionDesc" class="question-desc"></p>
+        <div id="options" class="options"></div>
+        <div class="controls">
+          <button id="prevBtn" class="btn btn-secondary">← 上一題</button>
+          <button id="nextBtn" class="btn btn-primary" disabled>下一題 →</button>
+        </div>
+      </div>
+      <p class="small-note">已選答案會保留，可以回上一題修改。第 21 題 A、E 分數待定，待補分後才能納入正式總分。</p>
+    </section>
+    <section id="result" class="hidden">
+      <div class="card">
+        <div class="result-head">
+          <div class="score-circle"><strong id="scoreValue">—</strong><span id="scoreDenom">已知分數</span></div>
+          <div id="resultLabel" class="result-label">正在整理結果</div>
+          <h2 id="resultTitle">你的信仰生活小報告</h2>
+          <p id="resultCopy" class="result-copy"></p>
+        </div>
+        <div class="result-grid">
+          <div class="mini"><div class="label">已完成作答</div><div id="answeredValue" class="value">0 / 25</div></div>
+          <div class="mini"><div class="label">待定選項</div><div id="pendingValue" class="value">0 題</div></div>
+          <div class="mini"><div class="label">已知得分</div><div id="knownValue" class="value">0 分</div></div>
+          <div class="mini"><div class="label">可能總分範圍</div><div id="rangeValue" class="value">—</div></div>
+        </div>
+        <div class="breakdown"><h3>📊 各篇章已知得分</h3><div id="breakdownRows"></div></div>
+        <p id="pendingNote" class="notice hidden"></p>
+        <div class="result-actions"><button id="reviewBtn" class="btn btn-secondary">← 檢查答案</button><button id="restartBtn" class="btn btn-primary">再玩一次！🎉</button><button id="copyBtn" class="btn btn-quiet">複製結果</button></div>
+        <p class="small-note">分數是依照你選擇的選項加總。第 21 題 A、E 目前不計分，因此只要選到其中一項，總分就會顯示為「已知分數」及可能範圍，而非假裝已經有正式完整分數。</p>
+      </div>
+    </section>
+  </main>
+  <footer>真耶穌教會《你有多愛耶穌？》青教組趣味版 · 願我們在日常生活中學習感謝主、愛人與實踐信仰。</footer>
+</div>
+<script>
+const questions = [
+{n:1,section:0,topic:'早晨起床',title:'當你每天早上起床時，你會怎麼開始新的一天？',options:[['A','先禱告，感謝主賜下新的一天。',4],['B','有想到主時，就簡單禱告。',3],['C','常常忘記禱告，但希望能改進。',2],['D','通常直接開始忙自己的事。',1]]},
+{n:2,section:0,topic:'遇到困難',title:'當你遇到困難或委屈時，你會怎麼做？',options:[['A','先向主禱告，也努力尋求合宜的解決方法。',4],['B','難過時會禱告，平常比較少。',3],['C','大多先自己想辦法，之後才想到禱告。',2],['D','覺得禱告沒有幫助，就不想禱告。',1]]},
+{n:3,section:0,topic:'安息日聚會',title:'到了安息日聚會的時間，你心裡最接近哪種想法？',options:[['A','期待敬拜主，也珍惜與弟兄姊妹相聚。',4],['B','願意參加，但偶爾會覺得疲倦。',3],['C','常常提不起勁，需要提醒自己。',2],['D','只要有其他事情，就不太想參加。',1]]},
+{n:4,section:0,topic:'被人得罪',title:'當有人得罪你、讓你很生氣時，你會怎麼回應？',options:[['A','求主幫助我饒恕對方，並用合宜的方式溝通。',4],['B','雖然生氣，還是會努力不報復。',3],['C','嘴上說沒關係，心裡卻一直記恨。',2],['D','一定要讓對方知道我也不好惹。',1]]},
+{n:5,section:0,topic:'幫助別人',title:'當你看到有人需要幫助時，你會怎麼做？',options:[['A','盡自己所能幫助對方，不求回報。',4],['B','有時間或能力時，願意幫忙。',3],['C','通常等別人先行動。',2],['D','覺得那是別人的事，與我無關。',1]]},
+{n:6,section:0,topic:'做錯事情',title:'當你做錯事，心裡知道不合主的教導時，你會怎麼做？',options:[['A','誠實面對自己的錯誤，向主悔改並努力改正。',4],['B','會後悔，也想辦法下次做得更好。',3],['C','知道不對，但常常替自己找理由。',2],['D','只要沒有人發現，就不太在意。',1]]},
+{n:7,section:0,topic:'讀經與聽道',title:'當你讀聖經或聽道理時，你最常有的態度是？',options:[['A','想明白主的話，並實踐在生活中。',4],['B','願意聽，也會記住一些重要的教導。',3],['C','有時認真，有時只是人在心不在。',2],['D','覺得與生活沒什麼關係。',1]]},
+{n:8,section:0,topic:'信仰受到嘲笑',title:'當別人嘲笑你的信仰時，你會怎麼做？',options:[['A','溫和而堅定地持守信仰，不以惡報惡。',4],['B','雖然尷尬，仍不願故意否認自己的信仰。',3],['C','會刻意隱瞞，避免別人知道。',2],['D','為了得到認同，願意放棄自己的原則。',1]]},
+{n:9,section:0,topic:'忙碌的一天',title:'當你很忙，沒有時間做自己喜歡的事時，你還會怎麼安排與主的關係？',options:[['A','努力安排時間禱告、親近主，也盡好自己的責任。',4],['B','有空就親近主，但忙起來容易忽略。',3],['C','常常忙完一天才發現忘了親近主。',2],['D','覺得等有空再說就好了。',1]]},
+{n:10,section:0,topic:'主問你愛不愛祂',title:'如果耶穌今天問你：「你愛我嗎？」你最想怎麼回答？',options:[['A','主啊，我願意用每天的生活來愛祢。',4],['B','主啊，我愛祢，也求祢幫助我更愛祢。',3],['C','主啊，我想愛祢，但我還有很多軟弱。',2],['D','我還沒有認真想過這個問題。',1]]},
+{n:11,section:1,topic:'起床大危機',title:'今天早上 6:10 校車，我驚嚇地跳起來，時間是 5:55，我要禱告多久呢？',options:[['A','完蛋了！只剩 15 分鐘，今天不禱告了啦！',1],['B','趕快禱告 1 分鐘，求主幫助我平安出門，接著迅速準備。',1],['C','不管了！一定要禱告滿 30 分鐘，校車等我一下！',1],['D','一邊刷牙、一邊穿鞋、一邊慌張地喊：「主啊！救命啊！」',1],['E','一陣奔跑過後，讓疾走CD一下，再低頭默禱。',4]]},
+{n:12,section:1,topic:'早餐消失事件',title:'今天早上因為差點遲到，來不及買早餐，我要不要順便禁食禱告呢？',options:[['A','太好了！省下早餐錢，直接宣布今天禁食，順便多禱告！',1],['B','既然沒買到早餐，就當作主安排的禁食日，不用再想了。',1],['C','不必刻意把來不及吃早餐當成禁食；先平安上學，有機會再吃東西，也可以正常禱告。',4],['D','沒吃早餐就是不夠愛主，今天一定要補做更多禱告。',1]]},
+{n:13,section:1,topic:'雞排便當誘惑',title:'中午終於等到便當來了！我超餓！先吃一口雞排，還是先默禱呢？',options:[['A','先默禱感謝主賜下飲食，再開心享用雞排！',4],['B','先偷咬一小口，反正嘴巴動的時候也可以默禱！',1],['C','太餓了，直接開吃！感謝主等吃完再說。',1],['D','旁邊有個長老會也在禱告，我跟她比看誰禱告久！',1]]},
+{n:14,section:1,topic:'籃球場意外',title:'下午打籃球時，認真模式下，不小心撞到同學，讓他流鼻血，怎麼辦？',options:[['A','趕快向主禱告，然後繼續打球，因為我不是故意的。',1],['B','先停下比賽，關心同學、請老師協助處理傷勢，並真誠道歉。',4],['C','趕快跑去禱告，求主讓同學不要生氣，其他的等一下再說。',1],['D','嘖，廢物就不該在球場上。',1]]},
+{n:15,section:1,topic:'醫務室回歸',title:'同學隔了一節課，從醫務室回來，我會說什麼？',options:[['A','你終於回來了！害我少打一節球欸！',1],['B','你沒事吧？真的很抱歉，現在還會痛嗎？有需要我幫忙的地方嗎？',4],['C','感謝主！你終於好了！那我們繼續打球吧！',1],['D','你有沒有禱告？下次我們一起禱告就不會受傷了！',1]]},
+{n:16,section:2,topic:'夕陽下的返家之旅',title:'放學了！落日餘暉下，我在返家的校車、火車或公車上，我會……',options:[['A','美好的一天，禱告感謝神，賜福今日的平安。',4],['B','跟旁邊同學聊天。',2],['C','牽手旁邊女同學的手說：「夕陽跟你一樣美。」',1,true],['D','故意低頭看向男同學，從低角度透過夕陽，享受他的帥。',1,true],['E','戴起耳機，睡覺。',3]]},
+{n:17,section:2,topic:'返家後的第一件事',title:'回到家後，第一件事……',options:[['A','脫鞋脫襪，直接躺在沙發上！',2],['B','洗手洗腳，馬上坐在餐桌上！',3],['C','輕手輕腳，靜靜躺在枕頭上！',1,true],['D','爸爸媽媽，你們好，我先讀聖經！',4],['E','爸爸媽媽，你們好，我先禱告！',4]]},
+{n:18,section:2,topic:'晚間聚會前的時間安排',title:'晚上聚會前的時間安排……',options:[['A','我要吃飯、洗澡、吹頭髮，7:40 出發。',1],['B','我要吃飯、洗澡、不洗頭，7:20 出發。',3],['C','我要吃飯、洗戰鬥澡，7:15 出發。',4],['D','我要吃飯、洗臉有精神，7:10 出發。',4],['E','下課後去教會旁邊 7-11 吃飯，7:30 直接上樓。',4]]},
+{n:19,section:2,topic:'禱告會結束後',title:'今天晚間聚會是禱告會，回家後……',options:[['A','已經滿足禱告上限，直接睡！！',0],['B','已經達成今天額度，明天再說！！爸爸生氣！挖起來禱告！',1],['C','一樣每日的讀經禱告。',4],['D','少一點好了，3 分鐘！',2]]},
+{n:20,section:2,topic:'半夜的惡夢突襲',title:'半夜作惡夢……',options:[['A','抱著枕頭找媽媽。',2],['B','馬上禱告。',4],['C','找媽媽禱告。',4],['D','夢回去，跟你拚了！',0]]},
+{n:21,section:3,topic:'安息日的手機誘惑',title:'今天安息日，一個人在教室，我滑著手機……',options:[['A','聽著 K-pop，稍微動一動練習。',null],['B','上午的聚會，有一個經節，想再看一看。',4],['C','準備下午的課程。',3],['D','彈琴——讚美詩。',4],['E','拿起 AWM。',null]]},
+{n:22,section:3,topic:'下午青教組課程',title:'下午青教組課程……',options:[['A','我要吃點心，先去教室等。',4],['B','今天好累……先假意去 7-11，然後跑回家。',0],['C','我跟同學有約，要去做報告。',0],['D','已經安靜，坐在教室等老師。',3]]},
+{n:23,section:3,topic:'課程結束後',title:'課程結束……',options:[['A','必須回家，馬上回家。',2],['B','再在教會多待一會，跟同學聊天。',4],['C','約同靈：「要不要一起去吃晚餐？」',3],['D','跟老師聊信仰。',4]]},
+{n:24,section:3,topic:'安息日回家後',title:'安息日回家後……',options:[['A','得著安息，身心靈平靜安穩。',4],['B','有夠累，趕緊睡覺！',2],['C','今天都還沒滑手機，我要玩到 12 點！',2],['D','跟爸爸媽媽分享教會聽到的道理。',4]]},
+{n:25,section:3,topic:'一整天的禱告總結',title:'一整天下來，我的禱告……',options:[['A','感謝神。',4],['B','打哈欠……什麼都沒想。',2],['C','AWM……喔！不對！感謝神！',3],['D','半夜 1 點……突然起來……蛤？禱告？',0]]}
+];
+const sectionNames = ['第一篇｜早晨與校園生活','第二篇｜趕校車、吃飯與放學','第三篇｜放學、返家與晚間聚會','第四篇｜安息日信仰生活'];
+const results = [
+{min:0,max:39,label:'第一級｜信仰起步中',title:'重新出發，不用灰心！🌱',copy:'生活可能讓你比較容易被手機、睡意和各種誘惑吸引。別灰心，愛主不是一場比賽，而是每天願意多親近主一點。從一句真誠的禱告、一段聖經開始吧！'},
+{min:40,max:54,label:'第二級｜愛主練習生',title:'慢慢靠近，繼續練習！💗',copy:'你已經有一些親近主的習慣，只是偶爾會被生活打亂。別只在聚會時想起主，也試著把感謝、關心別人和遵行主的教導帶進日常生活。'},
+{min:55,max:69,label:'第三級｜信仰成長中',title:'穩定成長，繼續加油！📖',copy:'你已經願意花時間親近主，也懂得在生活中實踐信仰。下一步不是追求更高的分數，而是讓讀經、禱告、愛人和負責任成為自然的生活習慣。'},
+{min:70,max:84,label:'第四級｜愛主行動派',title:'把信仰活出來！☀️',copy:'你不只想到親近主，也願意在生活中付出行動。無論是聚會、關心同靈，還是面對自己的錯誤，都繼續保持謙卑。真正的成長，是在沒有人看見時，仍然願意行善。'},
+{min:85,max:100,label:'第五級｜愛主實踐家',title:'持續同行，不要驕傲！🔥',copy:'從你的選擇中，可以看見你很重視信仰，也願意把主的教導放進生活。請繼續持守，不驕傲、不比較，也在軟弱時學習悔改。愛主不是拿到滿分就結束，而是一生持續跟隨主。'}
+];
+let current = 0;
+let answers = {};
+const $ = id => document.getElementById(id);
+function start() { $('start').classList.add('hidden'); $('result').classList.add('hidden'); $('quiz').classList.remove('hidden'); renderQuestion(); window.scrollTo({top:0,behavior:'smooth'}); }
+function renderQuestion() {
+  const q = questions[current];
+  $('sectionName').textContent = sectionNames[q.section];
+  $('progressText').textContent = `第 ${q.n} / ${questions.length} 題`;
+  $('progressFill').style.width = `${(current+1)/questions.length*100}%`;
+  $('topic').textContent = q.topic;
+  $('qType').textContent = q.n===21 ? '有 2 個選項分數待定' : '情境選擇題';
+  $('questionTitle').textContent = q.title;
+  $('questionDesc').textContent = q.n===21 ? '選擇最接近你的反應。A、E 分數尚未指定，選到後會保留待定，不會自動加分。' : '選擇最接近你平常反應的一項，沒有必要猜別人希望你選什麼。';
+  $('options').innerHTML = '';
+  q.options.forEach((o,idx) => {
+    const btn = document.createElement('button'); btn.type='button'; btn.className='option'+(answers[q.n]===o[0]?' selected':'');
+    const letter = document.createElement('span'); letter.className='letter'; letter.textContent=o[0];
+    const copy = document.createElement('span'); copy.className='option-copy'; copy.textContent=o[1];
+    const points = document.createElement('span'); points.className='points'+(o[2]===null?' pending':''); points.textContent=o[2]===null?'待定':`${o[2]} 分`;
+    btn.append(letter,copy,points); btn.addEventListener('click',()=>{answers[q.n]=o[0]; renderQuestion();}); $('options').appendChild(btn);
+  });
+  $('prevBtn').disabled = current===0;
+  $('nextBtn').disabled = !answers[q.n];
+  $('nextBtn').textContent = current===questions.length-1 ? '看我的結果 🎉' : '下一題 →';
+}
+function calc() {
+  let known=0, answered=0, pending=0, possible=0;
+  const sectionStats = [0,1,2,3].map(i=>({name:sectionNames[i].split('｜')[1],score:0,max:0,pending:0}));
+  questions.forEach(q=>{
+    const chosen = q.options.find(o=>o[0]===answers[q.n]);
+    if (!chosen) return;
+    answered++;
+    if (chosen[2]===null) { pending++; sectionStats[q.section].pending++; possible+=4; }
+    else { known+=chosen[2]; sectionStats[q.section].score+=chosen[2]; }
+    sectionStats[q.section].max += chosen[2]===null ? 4 : chosen[2];
+  });
+  return {known,answered,pending,possible,sectionStats};
+}
+function showResult() {
+  $('quiz').classList.add('hidden'); $('result').classList.remove('hidden');
+  const c=calc();
+  $('scoreValue').textContent=c.known;
+  $('scoreDenom').textContent=c.pending ? '已知分數（待定未計）' : '已計入的分數';
+  $('answeredValue').textContent=`${c.answered} / 25`;
+  $('pendingValue').textContent=`${c.pending} 題`;
+  $('knownValue').textContent=`${c.known} 分`;
+  $('rangeValue').textContent=c.pending?`${c.known}–${c.known+c.possible}`:`${c.known} 分`;
+  const chosenResult = results.find(r=>c.known>=r.min && c.known<=r.max) || results[0];
+  $('resultLabel').textContent=c.pending?'暫定結果｜仍有待定分數':chosenResult.label;
+  $('resultTitle').textContent=c.pending?'先看看目前的已知分數':chosenResult.title;
+  $('resultCopy').textContent=c.pending?'第 21 題 A 或 E 的分數尚未設定，所以現在只顯示已知分數與可能範圍。補上分數後，才能確定正式等級。'+ ' '+chosenResult.copy:chosenResult.copy;
+  $('breakdownRows').innerHTML='';
+  c.sectionStats.forEach((s,i)=>{
+    const maxPossible = questions.filter(q=>q.section===i && answers[q.n]).reduce((sum,q)=>{const o=q.options.find(o=>o[0]===answers[q.n]); return sum+(o&&o[2]===null?4:(o?o[2]:0));},0);
+    const row=document.createElement('div'); row.className='break-row';
+    const label=document.createElement('span'); label.textContent=s.name;
+    const bar=document.createElement('div'); bar.className='break-bar'; const fill=document.createElement('span'); fill.style.width=(maxPossible?Math.min(100,s.score/maxPossible*100):0)+'%'; bar.appendChild(fill);
+    const score=document.createElement('strong'); score.textContent=s.pending?`${s.score}+?`:`${s.score}`;
+    row.append(label,bar,score); $('breakdownRows').appendChild(row);
+  });
+  if(c.pending){$('pendingNote').classList.remove('hidden');$('pendingNote').textContent='⚠️ 第 21 題你選了尚未設定分數的 A 或 E。此選項未計入已知分數；可能總分範圍已把每個待定選項按 0–4 分估算，並非正式結果。';}else{$('pendingNote').classList.add('hidden');}
+  $('reviewBtn').onclick=()=>{current=0;$('result').classList.add('hidden');$('quiz').classList.remove('hidden');renderQuestion();window.scrollTo({top:0,behavior:'smooth'});};
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+$('startBtn').addEventListener('click',start);
+$('prevBtn').addEventListener('click',()=>{if(current>0){current--;renderQuestion();}});
+$('nextBtn').addEventListener('click',()=>{if(!answers[questions[current].n])return;if(current<questions.length-1){current++;renderQuestion();window.scrollTo({top:0,behavior:'smooth'});}else showResult();});
+$('restartBtn').addEventListener('click',()=>{answers={};current=0;$('result').classList.add('hidden');$('quiz').classList.add('hidden');$('start').classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'});});
+$('copyBtn').addEventListener('click',()=>{const c=calc();const text=`《你有多愛耶穌？》遊戲結果\n已完成：${c.answered}/25 題\n已知得分：${c.known} 分\n待定選項：${c.pending} 題\n可能總分範圍：${c.pending?`${c.known}–${c.known+c.possible}`:c.known}\n`+questions.filter(q=>answers[q.n]).map(q=>{const o=q.options.find(o=>o[0]===answers[q.n]);return `第${q.n}題：${o[0]}（${o[2]===null?'待定':o[2]+'分'}）`;}).join('\n');
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(()=>{ $('copyBtn').textContent='已複製！'; setTimeout(()=>$('copyBtn').textContent='複製結果',1600);}).catch(()=>window.prompt('複製以下結果：',text));}else{window.prompt('複製以下結果：',text);}});
+</script>
+</body>
+</html>
